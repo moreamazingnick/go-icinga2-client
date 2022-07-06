@@ -34,7 +34,7 @@ type Client interface {
 	CreateService(Service, string) error
 	ListServices(QueryFilter) ([]Service, error)
 	DeleteService(string) error
-	UpdateService(Service) error
+	UpdateService(Service, string) error
 
 	ProcessCheckResult(Service, Action) error
 }
