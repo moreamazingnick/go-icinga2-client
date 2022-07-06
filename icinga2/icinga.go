@@ -31,7 +31,7 @@ type Client interface {
 	ListDowntimes(QueryFilter) ([]Downtime, error)
 
 	GetService(string) (Service, error)
-	CreateService(Service) error
+	CreateService(Service, string) error
 	ListServices(QueryFilter) ([]Service, error)
 	DeleteService(string) error
 	UpdateService(Service) error

@@ -67,8 +67,8 @@ func (s *WebClient) GetService(name string) (Service, error) {
 	return serviceResults.Results[0].Service, nil
 }
 
-func (s *WebClient) CreateService(service Service) error {
-	serviceCreate := ServiceCreate{Templates: []string{"generic-service"}, Attrs: service}
+func (s *WebClient) CreateService(service Service, template string) error {
+	serviceCreate := ServiceCreate{Templates: []string{template}, Attrs: service}
 	// Strip "name" from create payload
 	serviceCreate.Attrs.Name = ""
 	err := s.CreateObject("/services/"+service.FullName(), serviceCreate)
