@@ -100,8 +100,8 @@ func (s *WebClient) DeleteService(name string) (err error) {
 	return
 }
 
-func (s *WebClient) UpdateService(service Service) error {
-	serviceUpdate := ServiceCreate{Attrs: service}
+func (s *WebClient) UpdateService(service Service, template string) error {
+	serviceUpdate := ServiceCreate{Templates: []string{template}, Attrs: service}
 	// Strip "name" from update payload
 	serviceUpdate.Attrs.Name = ""
 
@@ -117,7 +117,7 @@ func (s *MockClient) GetService(name string) (Service, error) {
 	}
 }
 
-func (s *MockClient) CreateService(service Service) error {
+func (s *MockClient) CreateService(service Service, template string) error {
 	s.mutex.Lock()
 	s.Services[service.FullName()] = service
 	s.mutex.Unlock()
@@ -142,7 +142,7 @@ func (s *MockClient) DeleteService(name string) error {
 	return nil
 }
 
-func (s *MockClient) UpdateService(service Service) error {
+func (s *MockClient) UpdateService(service Service, template string) error {
 	s.mutex.Lock()
 	s.Services[service.FullName()] = service
 	s.mutex.Unlock()
